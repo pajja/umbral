@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap");
+
+:root {
+  font-family: "Baskerville Old Face", Baskerville, serif;
+  color: #e9e3c4;
+  background: #000;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: #000;
+}
+a {
+  color: inherit;
+}
+section {
+  min-height: 100vh;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+#stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  padding: 1rem;
+  text-align: center;
+  transform: translateY(-10px);
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  font-weight: normal;
+}
+h1 {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: 0.7s;
+}
+.hero nav {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: 1.5s;
+}
+h1 {
+  font-family: "Castoro Titling", serif;
+  font-size: clamp(3rem, 4vw, 7rem);
+  letter-spacing: 1.5em;
+  text-indent: 1.5em;
+}
+.logo {
+  align-self: center;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: none;
+}
+.logo img {
+  display: block;
+  width: min(10vw, 390px);
+}
+.hero nav {
+  display: flex;
+  gap: 15vw;
+  font-size: clamp(1.25rem, 1.5vw, 2rem);
+  color: #ad0000;
+}
+.hero.revealed h1,
+.hero.revealed nav {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+#reveal-cursor {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: #ad0000;
+  pointer-events: none;
+  font-size: 1.25rem;
+}
+.about {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: #e9e3c4;
+  color: #000;
+}
+.about > div {
+  max-width: 1000px;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  text-align: center;
+}
+.about h2,
+.film-events h2 {
+  font-size: clamp(1.7rem, 2vw, 2.5rem);
+}
+.about h2 {
+  text-align: center;
+  color: #ad0000;
+}
+.about h3 {
+  margin: 1.5rem 0;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  color: #ad0000;
+}
+.about p {
+  font-family: "Baskerville Old Face", Baskerville, serif;
+  line-height: 2rem;
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+}
+.ornament {
+  width: clamp(8rem, 13vw, 16rem);
+  margin: 2rem auto;
+}
+.film {
+  display: grid;
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  isolation: isolate;
+  overflow: hidden;
+}
+.film-video {
+  display: block;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(1.5px);
+  mix-blend-mode: plus-lighter;
+  transition: opacity 4s linear;
+}
+.film-video:not(.is-active) {
+  opacity: 0;
+}
+.film-events {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+  padding: 2rem;
+  color: #e9e3c4;
+  text-align: center;
+  text-shadow: 0 2px 12px #000;
+}
+.film-events h2:first-child {
+  align-self: start;
+}
+.film-events h2:nth-child(2) {
+  align-self: center;
+}
+.film-events h2:last-child {
+  align-self: end;
+}
+.community-contact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 20vh;
+  background: #000;
+  color: #e9e3c4;
+}
+.community {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  place-content: end start;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  transition:
+    background-color 0.4s,
+    color 0.4s;
+}
+.mailing {
+  justify-self: center;
+  padding: 0.75rem 1.25rem;
+  background: #e9e3c4;
+  border-radius: 0.75rem;
+  color: #000;
+  transition:
+    background-color 0.4s,
+    color 0.4s;
+}
+.contact {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  place-content: end;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  color: #ad0000;
+  background: #e9e3c4;
+  transition: background-color 0.4s;
+}
+.community-contact:hover .contact {
+  background: #000;
+}
+.community-contact:hover .community {
+  background: #e9e3c4;
+  color: #000;
+}
+.community-contact:hover .mailing {
+  background: #000;
+  color: #e9e3c4;
+}
+@media (max-width: 500px) {
+  .logo {
+    cursor: pointer;
+  }
+  #reveal-cursor {
+    display: none !important;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+  }
+  .logo img {
+    width: min(30vw, 220px);
+  }
+  .hero nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .community-contact {
+    grid-template-columns: 1fr;
+  }
+  .community,
+  .contact {
+    place-content: center;
+  }
+}

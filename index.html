@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UMBRAL - a point of transition." />
+    <title>UMBRAL</title>
+    <link rel="icon" href="assets/favicon/favicon-32x32.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" id="home">
+        <canvas id="stars" aria-hidden="true"></canvas>
+        <div class="hero-content">
+          <h1>UMBRAL</h1>
+          <button class="logo" aria-label="Reveal Umbral navigation">
+            <img
+              src="assets/logo/umbral-logo-white-cornerless-less.png"
+              alt="UMBRAL"
+            />
+          </button>
+          <nav aria-label="Main navigation">
+            <a href="#about">about</a><a href="#events">events</a
+            ><a href="#community">community</a><a href="#contact">contact</a>
+          </nav>
+        </div>
+        <span id="reveal-cursor" aria-hidden="true">reveal</span>
+      </section>
+
+      <section class="about" id="about">
+        <div>
+          <h2>Umbral or Threshold</h2>
+          <h3>
+            is a point of transition between what is known and what is yet to be
+            discovered.
+          </h3>
+          <img class="ornament" src="assets/background/ornament.png" alt="" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </section>
+
+      <section class="film" aria-label="Umbral film">
+        <video
+          class="film-video is-active"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+        >
+          <source src="assets/video/loop-video.mp4" type="video/mp4" />
+        </video>
+        <video
+          class="film-video"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="assets/video/loop-video.mp4" type="video/mp4" />
+        </video>
+        <div class="film-events" id="events">
+          <h2>next event</h2>
+          <h2>UMBRAL at TILLATEC</h2>
+          <h2>september 13th</h2>
+        </div>
+      </section>
+
+      <section class="community-contact">
+        <div class="community" id="community">
+          <p>let's stay close</p>
+          <a
+            class="mailing"
+            href="mailto:umbral@umbral.com?subject=Mailing%20list"
+            >join our mailing list</a
+          >
+        </div>
+        <div class="contact" id="contact">
+          <a
+            href="https://www.instagram.com/umbral.ams/"
+            target="_blank"
+            rel="noreferrer"
+            >instagram</a
+          >
+          <p>
+            contact: <a href="mailto:umbral@umbral.com">umbral@umbral.com</a>
+          </p>
+        </div>
+      </section>
+    </main>
+    <script src="js/main.js"></script>
+  </body>
+</html>
