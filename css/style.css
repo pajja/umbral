@@ -38,7 +38,7 @@ section {
   display: grid;
   grid-template-rows: auto 1fr auto;
   justify-items: center;
-  padding: 1rem;
+  padding: 1rem 1rem;
   text-align: center;
   transform: translateY(-10px);
 }
@@ -149,7 +149,7 @@ h1 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: blur(1.5px);
+  /* filter: blur(1.5px); */
   mix-blend-mode: plus-lighter;
   transition: opacity 4s linear;
 }
@@ -192,7 +192,7 @@ h1 {
   gap: 2rem;
   padding: 2rem;
   text-align: center;
-  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
   transition:
     background-color 0.4s,
     color 0.4s;
@@ -215,7 +215,7 @@ h1 {
   gap: 2rem;
   padding: 2rem;
   text-align: center;
-  font-size: clamp(0.75rem, 1.25vw, 1.5rem);
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
   color: #ad0000;
   background: #e9e3c4;
   transition: background-color 0.4s;
@@ -237,6 +237,9 @@ h1 {
   }
   #reveal-cursor {
     display: none !important;
+  }
+  .hero-content {
+    padding: 3rem 1rem;
   }
   .hero h1 {
     font-size: 2rem;

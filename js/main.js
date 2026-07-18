@@ -5,6 +5,30 @@ const canvas = document.querySelector("#stars");
 const context = canvas.getContext("2d");
 let stars = [];
 let pointer = { x: -1000, y: -1000 };
+const mobileBreakpoint = matchMedia("(max-width: 500px)");
+let previousScrollY = scrollY;
+let starScrollVelocity = 0;
+const scrollStarSpeed = 0.1;
+const scrollInertia = 0.85;
+const scrollScatter = 1.5;
+
+function moveStarsWithScroll() {
+  const scrollDelta = scrollY - previousScrollY;
+
+  if (scrollDelta) {
+    starScrollVelocity -= scrollDelta * scrollStarSpeed;
+
+    const scatterStrength =
+      Math.abs(scrollDelta) * scrollStarSpeed * scrollScatter;
+    for (const star of stars) {
+      const direction = Math.random() * Math.PI * 2;
+      star.driftX += Math.cos(direction) * scatterStrength;
+      star.driftY += Math.sin(direction) * scatterStrength;
+    }
+  }
+
+  previousScrollY = scrollY;
+}
 
 function resize() {
   const scale = Math.min(devicePixelRatio, 2);
@@ -15,16 +39,25 @@ function resize() {
     x: Math.random() * innerWidth,
     y: Math.random() * innerHeight,
     size: Math.random() * 1.7 + 0.3,
+    driftX: 0,
+    driftY: 0,
   }));
 }
 
 function draw() {
   context.clearRect(0, 0, innerWidth, innerHeight);
   for (const star of stars) {
+    star.x = (((star.x + star.driftX) % innerWidth) + innerWidth) % innerWidth;
+    star.y =
+      (((star.y + starScrollVelocity + star.driftY) % innerHeight) +
+        innerHeight) %
+      innerHeight;
+    star.driftX *= scrollInertia;
+    star.driftY *= scrollInertia;
     const dx = pointer.x - star.x,
       dy = pointer.y - star.y;
     const distance = Math.hypot(dx, dy);
-    const pull = distance < 300 ? (300 - distance) / 60 : 0;
+    const pull = distance < 700 ? (700 - distance) / 60 : 0;
     context.fillStyle =
       star.size > 1.8
         ? "#fff0ad" /* pale yellow */
@@ -43,6 +76,7 @@ function draw() {
     );
     context.fill();
   }
+  starScrollVelocity *= scrollInertia;
   requestAnimationFrame(draw);
 }
 
@@ -52,11 +86,17 @@ logo.addEventListener("mouseleave", () => (cursor.style.display = "none"));
 logo.addEventListener("mousemove", (event) => {
   cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
 });
-hero.addEventListener(
-  "pointermove",
-  (event) => (pointer = { x: event.clientX, y: event.clientY }),
-);
+hero.addEventListener("pointermove", (event) => {
+  if (!mobileBreakpoint.matches) {
+    pointer = { x: event.clientX, y: event.clientY };
+  }
+});
 hero.addEventListener("pointerleave", () => (pointer = { x: -1000, y: -1000 }));
+mobileBreakpoint.addEventListener("change", () => {
+  if (mobileBreakpoint.matches) {
+    pointer = { x: -1000, y: -1000 };
+  }
+});
 
 const filmVideos = [...document.querySelectorAll(".film-video")];
 const filmCrossfadeSeconds = 4;
@@ -104,5 +144,6 @@ for (const video of filmVideos) {
 }
 
 addEventListener("resize", resize);
+addEventListener("scroll", moveStarsWithScroll, { passive: true });
 resize();
 draw();
