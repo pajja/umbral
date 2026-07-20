@@ -39,6 +39,9 @@ function resize() {
     x: Math.random() * innerWidth,
     y: Math.random() * innerHeight,
     size: Math.random() * 1.7 + 0.3,
+    color: ["#15281C", "#24422D", "#C5B459", "#E9E3C4"][
+      Math.floor(Math.random() * 4)
+    ],
     driftX: 0,
     driftY: 0,
   }));
@@ -58,14 +61,7 @@ function draw() {
       dy = pointer.y - star.y;
     const distance = Math.hypot(dx, dy);
     const pull = distance < 700 ? (700 - distance) / 60 : 0;
-    context.fillStyle =
-      star.size > 1.8
-        ? "#fff0ad" /* pale yellow */
-        : star.size > 1.5
-          ? "#ffd6e8" /* pale pink */
-          : star.size > 1.2
-            ? "#c9e7ff" /* pale blue */
-            : "#fff"; /* white */
+    context.fillStyle = star.color;
     context.beginPath();
     context.arc(
       star.x + (dx / distance || 0) * pull,
@@ -102,6 +98,11 @@ const filmVideos = [...document.querySelectorAll(".film-video")];
 const filmCrossfadeSeconds = 4;
 let activeFilmVideo = filmVideos[0];
 let filmCrossfadeInProgress = false;
+
+function playActiveFilm() {
+  activeFilmVideo.muted = true;
+  activeFilmVideo.play().catch(() => {});
+}
 
 async function crossfadeFilmLoop() {
   if (filmCrossfadeInProgress) return;
@@ -142,6 +143,12 @@ for (const video of filmVideos) {
     }
   });
 }
+
+playActiveFilm();
+activeFilmVideo.addEventListener("canplay", playActiveFilm, { once: true });
+addEventListener("visibilitychange", () => {
+  if (!document.hidden && activeFilmVideo.paused) playActiveFilm();
+});
 
 addEventListener("resize", resize);
 addEventListener("scroll", moveStarsWithScroll, { passive: true });

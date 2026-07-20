@@ -3,7 +3,7 @@
 :root {
   font-family: "Baskerville Old Face", Baskerville, serif;
   color: #e9e3c4;
-  background: #000;
+  background: #141c0f;
 }
 * {
   box-sizing: border-box;
@@ -13,7 +13,7 @@ html {
 }
 body {
   margin: 0;
-  background: #000;
+  background: #141c0f;
 }
 a {
   color: inherit;
@@ -43,8 +43,6 @@ section {
   transform: translateY(-10px);
 }
 h1,
-h2,
-h3,
 p {
   margin: 0;
   font-weight: normal;
@@ -112,23 +110,12 @@ h1 {
   padding: clamp(1.5rem, 5vw, 4rem);
   text-align: center;
 }
-.about h2,
-.film-events h2 {
-  font-size: clamp(1.7rem, 2vw, 2.5rem);
-}
-.about h2 {
-  text-align: center;
-  color: #ad0000;
-}
-.about h3 {
-  margin: 1.5rem 0;
-  font-size: clamp(1.2rem, 2vw, 1.7rem);
-  color: #ad0000;
-}
 .about p {
-  font-family: "Baskerville Old Face", Baskerville, serif;
-  line-height: 2rem;
-  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  line-height: 1.85rem;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+.about p.red {
+  color: #ad0000;
 }
 .ornament {
   width: clamp(8rem, 13vw, 16rem);
@@ -166,22 +153,24 @@ h1 {
   padding: 2rem;
   color: #e9e3c4;
   text-align: center;
-  text-shadow: 0 2px 12px #000;
+  font-size: clamp(1.5rem, 2vw, 2rem);
 }
-.film-events h2:first-child {
+.film-events p:first-child {
   align-self: start;
 }
-.film-events h2:nth-child(2) {
+.film-events p:nth-child(2) {
   align-self: center;
+  font-family: "Castoro Titling", serif;
+  text-shadow: 0 2px 12px #000;
 }
-.film-events h2:last-child {
+.film-events p:last-child {
   align-self: end;
 }
 .community-contact {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: 20vh;
-  background: #000;
+  background: #141c0f;
   color: #e9e3c4;
 }
 .community {
@@ -200,9 +189,8 @@ h1 {
 .mailing {
   justify-self: center;
   padding: 0.75rem 1.25rem;
-  background: #e9e3c4;
   border-radius: 0.75rem;
-  color: #000;
+  color: #e9e3c4;
   transition:
     background-color 0.4s,
     color 0.4s;
@@ -221,15 +209,14 @@ h1 {
   transition: background-color 0.4s;
 }
 .community-contact:hover .contact {
-  background: #000;
+  background: #141c0f;
 }
 .community-contact:hover .community {
   background: #e9e3c4;
   color: #000;
 }
 .community-contact:hover .mailing {
-  background: #000;
-  color: #e9e3c4;
+  color: #000;
 }
 @media (max-width: 500px) {
   .logo {
