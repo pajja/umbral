@@ -18,18 +18,29 @@ body {
 a {
   color: inherit;
 }
+main {
+  position: relative;
+}
 section {
   min-height: 100vh;
 }
 .hero {
   position: relative;
+  z-index: 1;
   overflow: hidden;
 }
-#stars {
+.stars {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 35vh),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 35vh), transparent);
 }
 .hero-content {
   position: absolute;
@@ -82,6 +93,10 @@ h1 {
   font-size: clamp(1.25rem, 1.5vw, 2rem);
   color: #ad0000;
 }
+.hero nav a {
+  text-decoration: none;
+  letter-spacing: 3px;
+}
 .hero.revealed h1,
 .hero.revealed nav {
   opacity: 1;
@@ -99,13 +114,18 @@ h1 {
   font-size: 1.25rem;
 }
 .about {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
   display: grid;
   place-items: center;
   padding: 2rem;
-  background: #e9e3c4;
+  background: transparent;
   color: #000;
 }
 .about > div {
+  position: relative;
+  z-index: 1;
   max-width: 1000px;
   padding: clamp(1.5rem, 5vw, 4rem);
   text-align: center;
@@ -113,12 +133,13 @@ h1 {
 .about p {
   line-height: 1.85rem;
   font-size: clamp(1.25rem, 2vw, 1.5rem);
+  color: #e9e3c4;
 }
 .about p.red {
   color: #ad0000;
 }
 .ornament {
-  width: clamp(8rem, 13vw, 16rem);
+  width: clamp(10rem, 15vw, 16rem);
   margin: 2rem auto;
 }
 .film {
@@ -163,20 +184,23 @@ h1 {
   font-family: "Castoro Titling", serif;
   text-shadow: 0 2px 12px #000;
 }
+.event-x {
+  font-family: "Baskerville Old Face", Baskerville, serif;
+}
 .film-events p:last-child {
   align-self: end;
 }
 .community-contact {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  min-height: 20vh;
+  min-height: 15vh;
   background: #141c0f;
   color: #e9e3c4;
 }
 .community {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  place-content: end start;
+  place-content: center start;
   align-items: center;
   gap: 2rem;
   padding: 2rem;
@@ -198,7 +222,7 @@ h1 {
 .contact {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  place-content: end;
+  place-content: center end;
   align-items: center;
   gap: 2rem;
   padding: 2rem;

@@ -1,10 +1,12 @@
 const hero = document.querySelector(".hero");
+const about = document.querySelector(".about");
 const logo = document.querySelector(".logo");
 const cursor = document.querySelector("#reveal-cursor");
-const canvas = document.querySelector("#stars");
+const canvas = document.querySelector(".stars");
 const context = canvas.getContext("2d");
 let stars = [];
 let pointer = { x: -1000, y: -1000 };
+let starFieldHeight = 0;
 const mobileBreakpoint = matchMedia("(max-width: 500px)");
 let previousScrollY = scrollY;
 let starScrollVelocity = 0;
@@ -32,12 +34,14 @@ function moveStarsWithScroll() {
 
 function resize() {
   const scale = Math.min(devicePixelRatio, 2);
+  starFieldHeight = hero.offsetHeight + about.offsetHeight;
+  canvas.style.height = `${starFieldHeight}px`;
   canvas.width = innerWidth * scale;
-  canvas.height = innerHeight * scale;
+  canvas.height = starFieldHeight * scale;
   context.setTransform(scale, 0, 0, scale, 0, 0);
   stars = Array.from({ length: Math.max(500, innerWidth / 3) }, () => ({
     x: Math.random() * innerWidth,
-    y: Math.random() * innerHeight,
+    y: Math.random() * starFieldHeight,
     size: Math.random() * 1.7 + 0.3,
     color: ["#15281C", "#24422D", "#C5B459", "#E9E3C4"][
       Math.floor(Math.random() * 4)
@@ -48,13 +52,13 @@ function resize() {
 }
 
 function draw() {
-  context.clearRect(0, 0, innerWidth, innerHeight);
+  context.clearRect(0, 0, innerWidth, starFieldHeight);
   for (const star of stars) {
     star.x = (((star.x + star.driftX) % innerWidth) + innerWidth) % innerWidth;
     star.y =
-      (((star.y + starScrollVelocity + star.driftY) % innerHeight) +
-        innerHeight) %
-      innerHeight;
+      (((star.y + starScrollVelocity + star.driftY) % starFieldHeight) +
+        starFieldHeight) %
+      starFieldHeight;
     star.driftX *= scrollInertia;
     star.driftY *= scrollInertia;
     const dx = pointer.x - star.x,
@@ -84,10 +88,20 @@ logo.addEventListener("mousemove", (event) => {
 });
 hero.addEventListener("pointermove", (event) => {
   if (!mobileBreakpoint.matches) {
-    pointer = { x: event.clientX, y: event.clientY };
+    pointer = {
+      x: event.clientX,
+      y: event.clientY - hero.getBoundingClientRect().top,
+    };
   }
 });
-hero.addEventListener("pointerleave", () => (pointer = { x: -1000, y: -1000 }));
+about.addEventListener("pointermove", (event) => {
+  if (!mobileBreakpoint.matches) {
+    pointer = {
+      x: event.clientX,
+      y: event.clientY - about.getBoundingClientRect().top + hero.offsetHeight,
+    };
+  }
+});
 mobileBreakpoint.addEventListener("change", () => {
   if (mobileBreakpoint.matches) {
     pointer = { x: -1000, y: -1000 };
