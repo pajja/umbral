@@ -39,7 +39,7 @@ function resize() {
   canvas.width = innerWidth * scale;
   canvas.height = starFieldHeight * scale;
   context.setTransform(scale, 0, 0, scale, 0, 0);
-  stars = Array.from({ length: Math.max(500, innerWidth / 3) }, () => ({
+  stars = Array.from({ length: Math.max(1000, innerWidth / 3) }, () => ({
     x: Math.random() * innerWidth,
     y: Math.random() * starFieldHeight,
     size: Math.random() * 1.7 + 0.3,
@@ -114,7 +114,12 @@ let activeFilmVideo = filmVideos[0];
 let filmCrossfadeInProgress = false;
 
 function playActiveFilm() {
-  activeFilmVideo.muted = true;
+  for (const video of filmVideos) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+  }
+
   activeFilmVideo.play().catch(() => {});
 }
 
@@ -147,6 +152,8 @@ async function crossfadeFilmLoop() {
 }
 
 for (const video of filmVideos) {
+  video.addEventListener("loadeddata", playActiveFilm, { once: true });
+  video.addEventListener("canplay", playActiveFilm, { once: true });
   video.addEventListener("timeupdate", () => {
     if (
       video === activeFilmVideo &&
@@ -159,10 +166,11 @@ for (const video of filmVideos) {
 }
 
 playActiveFilm();
-activeFilmVideo.addEventListener("canplay", playActiveFilm, { once: true });
 addEventListener("visibilitychange", () => {
   if (!document.hidden && activeFilmVideo.paused) playActiveFilm();
 });
+addEventListener("pointerdown", playActiveFilm, { once: true, passive: true });
+addEventListener("keydown", playActiveFilm, { once: true });
 
 addEventListener("resize", resize);
 addEventListener("scroll", moveStarsWithScroll, { passive: true });
