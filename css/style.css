@@ -214,7 +214,7 @@ h1 {
 }
 .mailing {
   justify-self: center;
-  padding: 0.5rem 1.5rem;
+  padding: 0 1.5rem;
   color: #e9e3c4;
   transition:
     background-color 0.4s,
