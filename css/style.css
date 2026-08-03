@@ -205,7 +205,7 @@ h1 {
   place-content: center start;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1.25rem 2rem;
   text-align: center;
   font-size: 1.15rem;
   transition:
@@ -214,8 +214,7 @@ h1 {
 }
 .mailing {
   justify-self: center;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.75rem;
+  padding: 0.5rem 1.5rem;
   color: #e9e3c4;
   transition:
     background-color 0.4s,
@@ -227,7 +226,7 @@ h1 {
   place-content: center end;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1.25rem 2rem;
   text-align: center;
   font-size: 1.15rem;
   color: #ad0000;
