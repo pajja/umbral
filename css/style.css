@@ -90,7 +90,7 @@ h1 {
 .hero nav {
   display: flex;
   gap: 15vw;
-  font-size: clamp(1.25rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.25rem, 1.5vw, 1.35rem);
   color: #ad0000;
 }
 .hero nav a {
@@ -177,7 +177,7 @@ h1 {
 }
 .film-events p:first-child {
   align-self: start;
-  font-size: clamp(1.25rem, 1.5vw, 1.35rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
 }
 .film-events p:nth-child(2) {
   align-self: center;
@@ -190,7 +190,7 @@ h1 {
 }
 .film-events p:last-child {
   align-self: end;
-  font-size: clamp(1.25rem, 1.5vw, 1.35rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
 }
 .community-contact {
   display: grid;
