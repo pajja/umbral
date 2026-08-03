@@ -177,7 +177,7 @@ h1 {
 }
 .film-events p:first-child {
   align-self: start;
-  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.45rem);
 }
 .film-events p:nth-child(2) {
   align-self: center;
@@ -190,7 +190,7 @@ h1 {
 }
 .film-events p:last-child {
   align-self: end;
-  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.45rem);
 }
 .community-contact {
   display: grid;
@@ -265,7 +265,7 @@ h1 {
   .hero nav {
     display: grid;
     grid-template-columns: repeat(2, max-content);
-    gap: 0.5rem 1rem;
+    gap: 3rem 4rem;
     justify-content: center;
   }
   .community-contact {
@@ -273,6 +273,10 @@ h1 {
   }
   .community,
   .contact {
+    grid-template-columns: 1fr;
     place-content: center;
+  }
+  .contact p {
+    overflow-wrap: anywhere;
   }
 }
