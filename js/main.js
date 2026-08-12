@@ -1,9 +1,12 @@
 const hero = document.querySelector(".hero");
 const about = document.querySelector(".about");
+const filmEvents = document.querySelector(".film-events");
 const logo = document.querySelector(".logo");
 const cursor = document.querySelector("#reveal-cursor");
 const canvas = document.querySelector(".stars");
 const context = canvas.getContext("2d");
+const main = document.querySelector("main");
+const pages = [...document.querySelectorAll("main > section")];
 let stars = [];
 let pointer = { x: -1000, y: -1000 };
 let starFieldHeight = 0;
@@ -13,6 +16,18 @@ let starScrollVelocity = 0;
 const scrollStarSpeed = 0.1;
 const scrollInertia = 0.85;
 const scrollScatter = 1.5;
+const pageFadeDistance = 0.25;
+const filmScrollStart = 2;
+const filmEventsRevealAt = 2;
+const communityScrollPosition = 3.3;
+
+function getFooterHeight() {
+  return mobileBreakpoint.matches ? 0.4 : 0.15;
+}
+
+function getPageScrollPosition(index) {
+  return index === pages.length - 1 ? communityScrollPosition : index;
+}
 
 function moveStarsWithScroll() {
   const scrollDelta = scrollY - previousScrollY;
@@ -32,9 +47,58 @@ function moveStarsWithScroll() {
   previousScrollY = scrollY;
 }
 
+function updatePages() {
+  const progress = scrollY / innerHeight;
+
+  pages.forEach((page, index) => {
+    if (page.classList.contains("community-contact")) return;
+
+    const pagePosition = getPageScrollPosition(index);
+    const entranceDistance = Math.max(
+      0,
+      pagePosition - progress - pageFadeDistance,
+    );
+    const exitDistance = page.classList.contains("film")
+      ? 0
+      : Math.max(0, progress - pagePosition - pageFadeDistance);
+    const opacity = Math.max(
+      0,
+      1 - Math.max(entranceDistance, exitDistance) * 4,
+    );
+    page.style.opacity = opacity;
+    page.classList.toggle("is-visible", opacity > 0.5);
+  });
+
+  filmEvents.classList.toggle("is-visible", progress >= filmEventsRevealAt);
+
+  const footerHeight = getFooterHeight();
+  const footerScrollStart = communityScrollPosition - footerHeight;
+  const footerProgress = Math.min(
+    1,
+    Math.max(0, (progress - footerScrollStart) / footerHeight),
+  );
+  const filmOffset = footerProgress * footerHeight * innerHeight;
+  document.querySelector(".film").style.transform =
+    `translateY(-${filmOffset}px)`;
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const target = document.querySelector(link.hash);
+    const page = target?.closest("section");
+    if (!page) return;
+
+    event.preventDefault();
+    scrollTo({
+      top: getPageScrollPosition(pages.indexOf(page)) * innerHeight,
+      behavior: "smooth",
+    });
+  });
+});
+
 function resize() {
   const scale = Math.min(devicePixelRatio, 2);
-  starFieldHeight = hero.offsetHeight + about.offsetHeight;
+  starFieldHeight = main.offsetHeight;
   canvas.style.height = `${starFieldHeight}px`;
   canvas.width = innerWidth * scale;
   canvas.height = starFieldHeight * scale;
@@ -80,12 +144,14 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-logo.addEventListener("click", () => hero.classList.toggle("revealed"));
+// logo.addEventListener("click", () => hero.classList.toggle("revealed"));
+/*
 logo.addEventListener("mouseenter", () => (cursor.style.display = "block"));
 logo.addEventListener("mouseleave", () => (cursor.style.display = "none"));
 logo.addEventListener("mousemove", (event) => {
   cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
 });
+*/
 hero.addEventListener("pointermove", (event) => {
   if (!mobileBreakpoint.matches) {
     pointer = {
@@ -173,6 +239,14 @@ addEventListener("pointerdown", playActiveFilm, { once: true, passive: true });
 addEventListener("keydown", playActiveFilm, { once: true });
 
 addEventListener("resize", resize);
-addEventListener("scroll", moveStarsWithScroll, { passive: true });
+addEventListener(
+  "scroll",
+  () => {
+    moveStarsWithScroll();
+    updatePages();
+  },
+  { passive: true },
+);
 resize();
+updatePages();
 draw();

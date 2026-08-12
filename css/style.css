@@ -20,14 +20,23 @@ a {
 }
 main {
   position: relative;
+  height: 430vh;
 }
 section {
+  position: fixed;
+  inset: 0;
   min-height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+}
+section.is-visible {
+  pointer-events: auto;
 }
 .hero {
-  position: relative;
+  position: fixed;
   z-index: 1;
   overflow: hidden;
+  opacity: 1;
 }
 .stars {
   position: absolute;
@@ -35,29 +44,23 @@ section {
   left: 0;
   width: 100%;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 calc(100% - 35vh),
-    transparent
-  );
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 35vh), transparent);
 }
 .hero-content {
   position: absolute;
   inset: 0;
   z-index: 1;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  justify-items: center;
+  /* grid-template-rows: auto 1fr auto; */
+  place-items: center;
   padding: 1rem 1rem;
   text-align: center;
   transform: translateY(-10px);
 }
-h1,
 p {
   margin: 0;
   font-weight: normal;
 }
+/*
 h1 {
   opacity: 0;
   pointer-events: none;
@@ -76,6 +79,7 @@ h1 {
   letter-spacing: 1.5em;
   text-indent: 1.5em;
 }
+*/
 .logo {
   align-self: center;
   border: 0;
@@ -87,6 +91,7 @@ h1 {
   display: block;
   width: min(10vw, 390px);
 }
+/*
 .hero nav {
   display: flex;
   gap: 15vw;
@@ -103,6 +108,7 @@ h1 {
   pointer-events: auto;
   transform: none;
 }
+*/
 #reveal-cursor {
   display: none;
   position: fixed;
@@ -114,7 +120,7 @@ h1 {
   font-size: 1.25rem;
 }
 .about {
-  position: relative;
+  position: fixed;
   z-index: 1;
   overflow: hidden;
   display: grid;
@@ -144,7 +150,7 @@ h1 {
 }
 .film {
   display: grid;
-  position: relative;
+  position: fixed;
   height: 100vh;
   height: 100svh;
   isolation: isolate;
@@ -174,6 +180,11 @@ h1 {
   padding: 2rem;
   color: #e9e3c4;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.film-events.is-visible {
+  opacity: 1;
 }
 .film-events p:first-child {
   align-self: start;
@@ -193,59 +204,66 @@ h1 {
   font-size: clamp(1.35rem, 1.8vw, 1.45rem);
 }
 .community-contact {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   min-height: 15vh;
-  background: #141c0f;
-  color: #e9e3c4;
+  min-height: 15svh;
+  opacity: 1;
+  pointer-events: auto;
 }
 .community {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  place-content: center start;
+  align-content: center;
+  justify-content: start;
   align-items: center;
   gap: 2rem;
-  padding: 1.25rem 2rem;
+  padding: 2rem;
+  background: #141c0f;
+  color: #e9e3c4;
   text-align: center;
   font-size: 1.15rem;
   transition:
     background-color 0.4s,
     color 0.4s;
+}
+.community-contact:hover .community {
+  background: #e9e3c4;
+  color: #141c0f;
 }
 .mailing {
   justify-self: center;
   padding: 0.5rem 1.5rem;
-  color: #e9e3c4;
-  transition:
-    background-color 0.4s,
-    color 0.4s;
 }
 .contact {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  place-content: center end;
+  align-content: center;
+  justify-content: end;
   align-items: center;
   gap: 2rem;
-  padding: 1.25rem 2rem;
+  padding: 2rem;
+  background: #e9e3c4;
+  color: #ad0000;
   text-align: center;
   font-size: 1.15rem;
-  color: #ad0000;
-  background: #e9e3c4;
-  transition: background-color 0.4s;
+  transition:
+    background-color 0.4s,
+    color 0.4s;
 }
 .community-contact:hover .contact {
   background: #141c0f;
-}
-.community-contact:hover .community {
-  background: #e9e3c4;
-  color: #000;
-}
-.community-contact:hover .mailing {
-  color: #000;
+  color: #ad0000;
 }
 @media (max-width: 500px) {
   .logo {
     cursor: pointer;
+  }
+  .logo img {
+    width: min(42vw, 220px);
   }
   #reveal-cursor {
     display: none !important;
@@ -253,6 +271,7 @@ h1 {
   .hero-content {
     padding: 3rem 1rem;
   }
+  /*
   .hero h1 {
     font-size: 2rem;
     letter-spacing: 0.5em;
@@ -267,8 +286,12 @@ h1 {
     gap: 3rem 4rem;
     justify-content: center;
   }
+  */
   .community-contact {
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    min-height: 40vh;
+    min-height: 40svh;
   }
   .community,
   .contact {
