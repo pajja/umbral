@@ -263,7 +263,7 @@ h1 {
     cursor: pointer;
   }
   .logo img {
-    width: min(42vw, 220px);
+    width: min(38vw, 220px);
   }
   #reveal-cursor {
     display: none !important;
