@@ -38,6 +38,7 @@ function loadMailingForm() {
   script.dataset.form = "mnq6qq";
   script.dataset.api = "https://sendfox.com";
   script.async = true;
+  script.addEventListener("load", () => mailingButton.click(), { once: true });
   mailingButton.after(script);
   mailingButton.dataset.loaded = "true";
 }
