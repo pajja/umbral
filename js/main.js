@@ -8,11 +8,6 @@ const context = canvas.getContext("2d");
 const main = document.querySelector("main");
 const pages = [...document.querySelectorAll("main > section")];
 const mailingButton = document.querySelector(".mailing");
-const mailingDialog = document.querySelector(".mailing-dialog");
-const mailingDialogCloseButton = document.querySelector(
-  ".mailing-dialog-close",
-);
-const mailingEmbed = document.querySelector(".mailing-embed");
 let stars = [];
 let pointer = { x: -1000, y: -1000 };
 let starFieldHeight = 0;
@@ -36,27 +31,18 @@ function getPageScrollPosition(index) {
 }
 
 function loadMailingForm() {
-  if (mailingEmbed.dataset.loaded) return;
+  if (mailingButton.dataset.loaded) return;
 
   const script = document.createElement("script");
   script.src = "https://cdn.sendfox.com/js/embed.js";
   script.dataset.form = "mnq6qq";
   script.dataset.api = "https://sendfox.com";
   script.async = true;
-  mailingEmbed.appendChild(script);
-  mailingEmbed.dataset.loaded = "true";
+  mailingButton.after(script);
+  mailingButton.dataset.loaded = "true";
 }
 
-mailingButton.addEventListener("click", () => {
-  mailingDialog.showModal();
-  loadMailingForm();
-});
-
-mailingDialogCloseButton.addEventListener("click", () => mailingDialog.close());
-
-mailingDialog.addEventListener("click", (event) => {
-  if (event.target === mailingDialog) mailingDialog.close();
-});
+mailingButton.addEventListener("click", loadMailingForm);
 
 function moveStarsWithScroll() {
   const scrollDelta = scrollY - previousScrollY;
