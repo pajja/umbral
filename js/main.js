@@ -123,7 +123,7 @@ function resize() {
     x: Math.random() * innerWidth,
     y: Math.random() * starFieldHeight,
     size: Math.random() * 1.7 + 0.3,
-    color: ["#15281C", "#24422D", "#C5B459", "#E9E3C4"][
+    color: ["#37452F", "#496F73", "#3C3D37", "#6F695C"][
       Math.floor(Math.random() * 4)
     ],
     driftX: 0,
