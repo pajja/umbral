@@ -2,7 +2,7 @@
 
 :root {
   font-family: "Baskerville Old Face", Baskerville, serif;
-  color: #aeb8ae;
+  color: #b1afa1;
   background: #161f15;
 }
 * {
@@ -107,7 +107,7 @@ h1 {
   display: flex;
   gap: 15vw;
   font-size: clamp(1.25rem, 1.5vw, 1.35rem);
-  color: #720000;
+  color: #6a0000;
 }
 .hero nav a {
   text-decoration: none;
@@ -126,7 +126,7 @@ h1 {
   top: 0;
   left: 0;
   z-index: 2;
-  color: #720000;
+  color: #6a0000;
   pointer-events: none;
   font-size: 1.25rem;
 }
@@ -150,10 +150,10 @@ h1 {
 .about p {
   line-height: 1.85rem;
   font-size: clamp(1.25rem, 1.5vw, 1.3rem);
-  color: #aeb8ae;
+  color: #b1afa1;
 }
 .about p.red {
-  color: #720000;
+  color: #6a0000;
 }
 .ornament {
   width: clamp(10rem, 14vw, 12rem);
@@ -189,7 +189,7 @@ h1 {
   grid-template-rows: repeat(3, 1fr);
   justify-items: center;
   padding: 2rem;
-  color: #aeb8ae;
+  color: #b1afa1;
   text-align: center;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -234,7 +234,7 @@ h1 {
   gap: 2rem;
   padding: 2rem;
   background: #161f15;
-  color: #aeb8ae;
+  color: #b1afa1;
   text-align: center;
   font-size: 1.15rem;
   transition:
@@ -242,7 +242,7 @@ h1 {
     color 0.4s;
 }
 .community-contact:hover .community {
-  background: #aeb8ae;
+  background: #b1afa1;
   color: #161f15;
 }
 .mailing {
@@ -263,8 +263,8 @@ h1 {
   align-items: center;
   gap: 2rem;
   padding: 2rem;
-  background: #aeb8ae;
-  color: #720000;
+  background: #b1afa1;
+  color: #6a0000;
   text-align: center;
   font-size: 1.15rem;
   transition:
@@ -273,7 +273,7 @@ h1 {
 }
 .community-contact:hover .contact {
   background: #161f15;
-  color: #720000;
+  color: #6a0000;
 }
 @media (max-width: 500px) {
   .logo {
