@@ -45,6 +45,29 @@ function loadMailingForm() {
 
 mailingButton.addEventListener("click", loadMailingForm);
 
+document.addEventListener(
+  "submit",
+  (event) => {
+    const form = event.target;
+    if (
+      !(form instanceof HTMLFormElement) ||
+      !form.closest(".sendfox-embed-card")
+    )
+      return;
+
+    const observer = new MutationObserver(() => {
+      if (!form.isConnected) {
+        observer.disconnect();
+        location.assign("thank-you.html");
+      } else if (form.querySelector(".sendfox-embed-error")) {
+        observer.disconnect();
+      }
+    });
+    observer.observe(form.parentElement, { childList: true, subtree: true });
+  },
+  true,
+);
+
 function moveStarsWithScroll() {
   const scrollDelta = scrollY - previousScrollY;
 

@@ -275,6 +275,30 @@ h1 {
   background: #161f15;
   color: #6a0000;
 }
+/* Thank-you page styles for thank-you.html */
+.thank-you-page {
+  display: grid;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  place-content: center;
+  padding: 2rem;
+  color: #b1afa1;
+  font-family: Baskerville, serif;
+  text-align: center;
+}
+.thank-you-page main {
+  height: auto;
+  max-width: 36rem;
+}
+.thank-you-page p {
+  line-height: 1.5;
+}
+.thank-you-home {
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: underline;
+}
 @media (max-width: 500px) {
   .logo {
     cursor: pointer;
